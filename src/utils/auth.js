@@ -1,7 +1,21 @@
-export function hasAdminAccess(user) {
-  const role = typeof user?.role === "string" ? user.role.toLowerCase() : "";
+function resolveAdminAccess(user) {
+  if (typeof user?.admin === "boolean") {
+    return user.admin;
+  }
 
-  return Boolean(user?.admin || user?.isAdmin || role === "admin");
+  if (typeof user?.isAdmin === "boolean") {
+    return user.isAdmin;
+  }
+
+  if (typeof user?.role === "string") {
+    return user.role.toLowerCase() === "admin";
+  }
+
+  return false;
+}
+
+export function hasAdminAccess(user) {
+  return Boolean(user?.admin);
 }
 
 export function normalizeUser(user) {
@@ -9,8 +23,13 @@ export function normalizeUser(user) {
     return null;
   }
 
-  return {
+  const normalizedUser = {
     ...user,
-    admin: hasAdminAccess(user),
+    admin: resolveAdminAccess(user),
   };
+
+  delete normalizedUser.isAdmin;
+  delete normalizedUser.role;
+
+  return normalizedUser;
 }

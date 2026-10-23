@@ -183,7 +183,7 @@ function AdminQuizzes() {
     try {
       setActionLoading(true);
       setActionError("");
-      await api.post(`/quizzes/${selectedQuizId}/question`, payload);
+      await api.post(`/quizzes/${selectedQuizId}/questions`, payload);
       setShowQuestionModal(false);
       setPendingSelectionIds(null);
       setFeedback({
