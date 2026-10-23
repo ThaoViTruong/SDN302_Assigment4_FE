@@ -1,11 +1,13 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/auth/authSlice";
+import { hasAdminAccess } from "../utils/auth";
 
 function AppLayout({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+  const isAdmin = hasAdminAccess(user);
   const displayInitial = user?.username?.charAt(0)?.toUpperCase() || "U";
 
   const handleLogout = () => {
@@ -23,7 +25,7 @@ function AppLayout({ children }) {
             Quiz Application
           </NavLink>
 
-          {user?.admin && (
+          {isAdmin && (
             <div className="app-nav-links">
               <NavLink
                 className={({ isActive }) =>
@@ -53,14 +55,14 @@ function AppLayout({ children }) {
           )}
 
           <div className="app-navbar-actions">
-            {user?.admin && (
+            {isAdmin && (
               <div className="app-status-dot" aria-hidden="true" />
             )}
             <div className="app-user-pill">
               <span className="app-avatar">{displayInitial}</span>
               <span className="app-user-text">
                 {user?.username}
-                {user?.admin ? " (Admin)" : ""}
+                {isAdmin ? " (Admin)" : ""}
               </span>
             </div>
 

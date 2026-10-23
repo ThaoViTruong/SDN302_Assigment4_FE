@@ -1,10 +1,11 @@
 
 import { createSlice } from "@reduxjs/toolkit";
+import { normalizeUser } from "../../utils/auth";
 
 const parseSavedUser = () => {
   try {
     const savedUser = localStorage.getItem("user");
-    return savedUser ? JSON.parse(savedUser) : null;
+    return savedUser ? normalizeUser(JSON.parse(savedUser)) : null;
   } catch {
     localStorage.removeItem("user");
     return null;
@@ -23,12 +24,12 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      state.user = action.payload.user;
+      state.user = normalizeUser(action.payload.user);
       state.token = action.payload.token;
 
       localStorage.setItem(
         "user",
-        JSON.stringify(action.payload.user)
+        JSON.stringify(state.user)
       );
       localStorage.setItem("token", action.payload.token);
     },

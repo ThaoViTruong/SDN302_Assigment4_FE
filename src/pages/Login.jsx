@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link, Navigate, useLocation } from "react-router-dom";
 import api from "../services/api";
 import { loginSuccess } from "../features/auth/authSlice";
+import { hasAdminAccess } from "../utils/auth";
 
 function Login() {
   const [form, setForm] = useState({
@@ -17,9 +18,10 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, token } = useSelector((state) => state.auth);
+  const defaultPath = hasAdminAccess(user) ? "/admin/quizzes" : "/quizzes";
 
   if (user && token) {
-    return <Navigate to="/quizzes" replace />;
+    return <Navigate to={defaultPath} replace />;
   }
 
   const handleChange = (e) => {
@@ -37,7 +39,11 @@ function Login() {
     try {
       const response = await api.post("/users/login", form);
       dispatch(loginSuccess(response.data));
-      navigate(location.state?.from?.pathname || "/quizzes", { replace: true });
+      navigate(
+        location.state?.from?.pathname ||
+          (hasAdminAccess(response.data.user) ? "/admin/quizzes" : "/quizzes"),
+        { replace: true }
+      );
     } catch (err) {
       setError(
         err.response?.data?.message ||

@@ -16,10 +16,19 @@ import NotFound from "./pages/NotFound";
 import QuizDetails from "./pages/QuizDetails";
 import QuizList from "./pages/QuizList";
 import Signup from "./pages/Signup";
+import { hasAdminAccess } from "./utils/auth";
+
+function getDefaultRoute(user, token) {
+  if (!user || !token) {
+    return "/login";
+  }
+
+  return hasAdminAccess(user) ? "/admin/quizzes" : "/quizzes";
+}
 
 function HomeRedirect() {
   const { user, token } = useSelector((state) => state.auth);
-  return <Navigate to={user && token ? "/quizzes" : "/login"} replace />;
+  return <Navigate to={getDefaultRoute(user, token)} replace />;
 }
 
 function QuizDetailsRoute() {
@@ -52,6 +61,14 @@ function App() {
               <AppLayout>
                 <QuizDetailsRoute />
               </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute adminOnly>
+              <Navigate to="/admin/quizzes" replace />
             </ProtectedRoute>
           }
         />
