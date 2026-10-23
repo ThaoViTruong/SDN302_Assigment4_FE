@@ -1,0 +1,254 @@
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #212529;
+  background-color: #f8f9fa;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: #f8f9fa;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-navbar {
+  background: linear-gradient(90deg, #2f6df6 0%, #2f59dd 58%, #3942c6 100%);
+  padding: 0;
+}
+
+.app-navbar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 66px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app-brand {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-brand:hover {
+  color: #fff;
+}
+
+.app-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.app-nav-link {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.7rem 1.05rem;
+  border-radius: 0.85rem;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.app-nav-link.active {
+  background: #fff5ef;
+  color: #1e4fd6;
+  box-shadow: 0 8px 22px rgba(17, 24, 39, 0.14);
+}
+
+.app-navbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.app-status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #2ee57d;
+  box-shadow: 0 0 0 4px rgba(46, 229, 125, 0.18);
+}
+
+.app-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.8rem 0.35rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.16);
+  color: #fff;
+}
+
+.app-avatar {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.16);
+  color: #eef4ff;
+}
+
+.app-user-text {
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.app-logout-btn {
+  border: 0;
+  border-radius: 0.85rem;
+  background: #ffca2c;
+  color: #2f2a10;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.app-logout-btn:hover {
+  background: #ffc107;
+}
+
+.app-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.75rem 1rem 2rem;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.auth-page {
+  background: linear-gradient(180deg, #eef5ff 0%, #f8f9fa 100%);
+}
+
+.auth-card {
+  border-radius: 1.25rem;
+}
+
+.page-hero {
+  padding: 1rem 0;
+}
+
+.quiz-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-2px);
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.modal-backdrop-custom {
+  background-color: rgba(33, 37, 41, 0.5);
+}
+
+.result-stat-card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 1rem;
+  padding: 1rem;
+  height: 100%;
+}
+
+.assignment-panel {
+  border: 1px solid #e9ecef;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #fff;
+}
+
+.assignment-list {
+  overflow-y: visible;
+}
+
+.assignment-list-scroll {
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.assignment-item {
+  border-radius: 0.75rem !important;
+  margin-bottom: 0.5rem;
+  border: 1px solid #e9ecef !important;
+}
+
+@media (max-width: 991.98px) {
+  .app-navbar-inner {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .app-nav-links {
+    order: 3;
+    width: 100%;
+  }
+
+  .app-navbar-actions {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .app-navbar-inner {
+    padding: 0.75rem;
+  }
+
+  .app-nav-link {
+    padding: 0.6rem 0.85rem;
+  }
+
+  .app-navbar-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .app-user-pill {
+    max-width: calc(100% - 120px);
+  }
+
+  .app-user-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
